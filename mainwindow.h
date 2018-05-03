@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QTextDocument>
+#include <QTextDocumentFragment>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +21,11 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+public slots:
+    void buttonGetDataClicked();
+    void buttonComputeClicked();
+    void replyFinished(QNetworkReply *reply);
 };
 
 #endif // MAINWINDOW_H
