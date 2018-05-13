@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QString>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QTextDocument>
@@ -21,6 +22,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    QString siteAddres;
+    QNetworkAccessManager *manager;
+    QStringList parsedList;
 
 public slots:
     void buttonGetDataClicked();
