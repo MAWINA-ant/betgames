@@ -23,9 +23,13 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    QString siteAddres;
+    QString siteAddres;             // адрес сайта
+    int numberOfPage;               // номер страницы результатов
     QNetworkAccessManager *manager;
     QStringList parsedList;
+
+    QMap<int, int> frequency;
+    QMap<int, int> frequencyAll;
 
 public slots:
     void buttonGetDataClicked();
