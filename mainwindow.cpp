@@ -29,10 +29,12 @@ void MainWindow::buttonGetDataClicked()
     manager = new QNetworkAccessManager(this);
     connect(manager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(replyFinished(QNetworkReply*)));
-
-    siteAddres = "https://www.betgamesafrica.co.za/ext/game/results/testpartner/"
-                + QDate::currentDate().toString("yyyy-MM-dd") + "/1/";
-    manager->get(QNetworkRequest(QUrl(siteAddres + QString::number(numberOfPage))));
+    QDate dateForSiteAddress = QDate::currentDate();
+    if (QTime::currentTime().hour() >= 0 && QTime::currentTime().hour() < 3)
+        dateForSiteAddress.setDate(dateForSiteAddress.year(), dateForSiteAddress.month(), dateForSiteAddress.day() - 1);
+    siteAddress = "https://www.betgamesafrica.co.za/ext/game/results/testpartner/"
+                + dateForSiteAddress.toString("yyyy-MM-dd") + "/1/";
+    manager->get(QNetworkRequest(QUrl(siteAddress + QString::number(numberOfPage))));
 }
 
 //**************************************
@@ -99,7 +101,7 @@ void MainWindow::replyFinished(QNetworkReply *reply)
     if (numberOfPage < (QString(unparsedList.last()).toInt() + 1)) {//&&
         //parsedList.size() < 90) {
         numberOfPage++;
-        manager->get(QNetworkRequest(QUrl(siteAddres + QString::number(numberOfPage))));
+        manager->get(QNetworkRequest(QUrl(siteAddress + QString::number(numberOfPage))));
     } else {
         for (int i = 0; i < parsedList.size(); i++) {
             int sum = 0;

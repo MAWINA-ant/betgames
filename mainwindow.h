@@ -23,7 +23,7 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    QString siteAddres;             // адрес сайта
+    QString siteAddress;            // адрес сайта
     int numberOfPage;               // номер страницы результатов
     QNetworkAccessManager *manager;
     QStringList parsedList;
